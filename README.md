@@ -1,16 +1,44 @@
-# React + Vite
+# Docker React + Vite Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A containerized React + Vite development environment using Docker.
 
-Currently, two official plugins are available:
+## Docker Setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This project includes a `Dockerfile` configured for development using Node.js Alpine image for a lightweight container.
 
-## React Compiler
+### Building the Docker Image
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+docker build -t docker-test .
+```
 
-## Expanding the ESLint configuration
+### Running the Container
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+docker run -p 5173:5173 docker-test
+```
+
+The application will be available at `http://localhost:5173`
+
+## Docker Configuration
+
+- **Base Image**: `node:22-alpine`
+- **Working Directory**: `/app`
+- **Exposed Port**: `5173` (Vite dev server)
+- **Start Command**: `npm run dev`
+
+## Development Commands
+
+Inside the container or locally:
+
+- `npm run dev` - Start Vite development server
+- `npm run build` - Build for production
+- `npm run lint` - Run ESLint
+- `npm run preview` - Preview production build
+
+## Project Structure
+
+- `Dockerfile` - Container configuration
+- `src/` - React source files
+- `public/` - Static assets
+- `package.json` - Project dependencies and scripts
